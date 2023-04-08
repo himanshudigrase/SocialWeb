@@ -1,4 +1,4 @@
-import  express  from "express";
+import express  from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -8,6 +8,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+import {register} from './controllers/auth.js'
+import {authRoutes} from './routes/auth';
 
 //  Configuration - middleware configs 
 
@@ -35,6 +37,14 @@ const storage = multer.diskStorage({
     },
 });
 
+
+/*Auth code with middleware*/
+app.post('/auth/login',upload.single('/picture'),register);
+
+/* ROUTES*/
+app.use("/auth",authRoutes);
+
+
 const upload = multer({storage});
 
 /* MONGOOSE Setup*/
@@ -43,6 +53,7 @@ const PORT = process.env.PORT || 6001;
 mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    
 })
 .then(()=>{
     app.listen(PORT,()=>console.log(`Server Port: ${PORT}`));
