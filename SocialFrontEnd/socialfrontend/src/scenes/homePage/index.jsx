@@ -6,6 +6,8 @@ import MyPostWidget from "../widgets/MyPostWidget";
 import PostWidget from "../widgets/PostWidget";
 import AdvertWidget from "../widgets/AdvertWidget";
 import FriendListWidget from "../widgets/FriendListWidget";
+import PostsWidget from "../widgets/PostsWidget";
+
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");

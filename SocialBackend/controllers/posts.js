@@ -1,6 +1,6 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
-const logger = require("../logger.js");
+import logger from "../logger.js";
 /* CREATE */
 
 export const createPost = async(req,res) =>{
@@ -62,13 +62,14 @@ export const likePost = async(req,res) =>{
     try{
         const {id} = req.params;
         const {userId} = req.body;
+        console.log(userId);
         const post = await Post.findById(id);
         const isLiked = post.likes.get(userId);
 
         if(isLiked){
             post.likes.delete(userId);
         } else {
-            post.likes.set(userID, true);
+            post.likes.set(userId, true);
         }
 
         const updatedPost = await Post.findByIdAndUpdate(
@@ -80,7 +81,7 @@ export const likePost = async(req,res) =>{
         res.status(200).json(updatedPost);
     }
     catch(e){
-        logger.error(`Events Error: Post Like / Unlike Error of User`);
+        logger.error(`Events Error: Post Like / Unlike Error of User`+e.message);
         res.status(404).json({ message: e.message});
     }
 }

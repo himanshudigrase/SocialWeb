@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-const logger = require("../logger.js");
+import logger from "../logger.js";
 /*READ*/
 export const getUser = async(req,res) =>{
     try{

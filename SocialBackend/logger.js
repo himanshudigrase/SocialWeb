@@ -1,6 +1,6 @@
-const { createLogger, transports, format } = require("winston");
+import { createLogger, transports, format } from "winston";
 
-const { combine, timestamp, label, printf } = format;
+const { combine, timestamp, label, printf,prettyPrint } = format;
 const CATEGORY = "winston custom format";
 
 // //Using the printf format.
@@ -29,4 +29,4 @@ const logger = createLogger({
   //...
 });
 
-module.exports = logger;
+export default  logger;

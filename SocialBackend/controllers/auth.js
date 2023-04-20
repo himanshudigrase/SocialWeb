@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-const logger = require("../logger.js");
+import logger from "../logger.js";
 /*Register User*/
 
 export const register = async(req,res) =>{

@@ -47,8 +47,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 /*Auth code with middleware*/
-app.post('/auth/register',upload.single('/picture'),register);
-app.post('/posts', verifyToken,upload.single('/picture'),createPost);
+app.post('/auth/register',upload.single('picture'),register);
+app.post('/posts', verifyToken,upload.single('picture'),createPost);
 
 
 
