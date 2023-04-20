@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import logger from "../logger";
 
 export const verifyToken = async(req,res,next) =>{
     try{
@@ -14,6 +15,7 @@ export const verifyToken = async(req,res,next) =>{
         req.user = verified;
         next();
     }catch (e){
+        logger.error('Error during JWT authentication');
         res.status(500).json({error: e.message});
     }
 };
