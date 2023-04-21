@@ -40,13 +40,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      # Build a Docker image for the client application
-      - name: Build Client Docker Image
-        working-directory: ./SocialFrontEnd/socialfrontend
-        # Build image with tag rakeshpotnuru/productivity-app:client
-        run: |
-          docker build -t himanshudigrase/socialmedia:frontend-${{github.run_number}} .
-
       # Build a Docker image for the server application
       - name: Build Server Docker Image
         working-directory:
@@ -54,6 +47,14 @@ jobs:
           # Build image with tag rakeshpotnuru/productivity-app:server
         run: |
           docker build -t himanshudigrase/socialmedia:backend-${{github.run_number}} .
+      # Build a Docker image for the client application
+      - name: Build Client Docker Image
+        working-directory: ./SocialFrontEnd/socialfrontend
+        # Build image with tag rakeshpotnuru/productivity-app:client
+        run: |
+          docker build -t himanshudigrase/socialmedia:frontend-${{github.run_number}} .
+
+ 
 
       # Login to Docker Hub using credentials from repository secrets
       - name: Login to Docker Hub
