@@ -70,5 +70,5 @@ jobs:
       # Push the Docker images to Docker Hub
       - name: Push Docker Images to Docker Hub
         run: |
-          docker push himanshudigrase/socialMedia:frontEnd-${{github.run_number}}
-          docker push himanshudigrase/socialMedia:backEnd-${{github.run_number}}
+          docker push himanshudigrase/socialmedia:frontend-${{github.run_number}}
+          docker push himanshudigrase/socialmedia:backend-${{github.run_number}}
