@@ -13,7 +13,7 @@ env:
   PORT: 3001
 # This is the workflow that is being run.
 jobs:
-  build-and-deploy:
+  build:
     # This is telling GitHub to run the workflow on the latest version of Ubuntu.
     runs-on: ubuntu-latest
     steps:
@@ -36,13 +36,16 @@ jobs:
           export TOKEN_KEY=$JWT_SECRET
           export PORT=$PORT
           
-
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       # Build a Docker image for the client application
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
         # Build image with tag rakeshpotnuru/productivity-app:client
         run: |
-          docker build -t himanshudigrase/socialMedia:frontEnd-${{github.run_number}} .
+          docker build -t himanshudigrase/socialmedia:frontend-${{github.run_number}} .
 
       # Build a Docker image for the server application
       - name: Build Server Docker Image
@@ -50,7 +53,7 @@ jobs:
           ./SocialBackend
           # Build image with tag rakeshpotnuru/productivity-app:server
         run: |
-          docker build -t himanshudigrase/socialMedia:backEnd-${{github.run_number}} .
+          docker build -t himanshudigrase/socialmedia:backend-${{github.run_number}} .
 
       # Login to Docker Hub using credentials from repository secrets
       - name: Login to Docker Hub
