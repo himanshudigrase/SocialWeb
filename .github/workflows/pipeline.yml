@@ -50,13 +50,13 @@ jobs:
           ./SocialBackend
           # Build image with tag rakeshpotnuru/productivity-app:server
         run: |
-          docker build -t himanshudigrase/socialmedia:backend-${{github.run_number}} .
+          docker build -t hims0301/socialmedia:backend-${{github.run_number}} .
       # Build a Docker image for the client application
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
         # Build image with tag rakeshpotnuru/productivity-app:client
         run: |
-          docker build -t himanshudigrase/socialmedia:frontend-${{github.run_number}} .
+          docker build -t hims0301/socialmedia:frontend-${{github.run_number}} .
 
  
 
@@ -70,5 +70,5 @@ jobs:
       # Push the Docker images to Docker Hub
       - name: Push Docker Images to Docker Hub
         run: |
-          docker push himanshudigrase/socialmedia:frontend-${{github.run_number}}
-          docker push himanshudigrase/socialmedia:backend-${{github.run_number}}
+          docker push hims0301/socialmedia:frontend-${{github.run_number}}
+          docker push hims0301/socialmedia:backend-${{github.run_number}}
