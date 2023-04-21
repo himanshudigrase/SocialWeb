@@ -1,6 +1,6 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
-import logger from "../logger.js";
+
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
@@ -20,10 +20,8 @@ export const createPost = async (req, res) => {
     await newPost.save();
 
     const post = await Post.find();
-    logger.info("New post uploaded")
     res.status(201).json(post);
   } catch (err) {
-    logger.error("Events Error: Post Creation Error");
     res.status(409).json({ message: err.message });
   }
 };
@@ -34,7 +32,6 @@ export const getFeedPosts = async (req, res) => {
     const post = await Post.find();
     res.status(200).json(post);
   } catch (err) {
-    logger.error("Events Error: Post Fetch Error");
     res.status(404).json({ message: err.message });
   }
 };
@@ -43,10 +40,8 @@ export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
     const post = await Post.find({ userId });
-    logger.info("Post fetch operation");
     res.status(200).json(post);
   } catch (err) {
-    logger.error(`Events Error: Post Fetch Error of User ${req.params}`);
     res.status(404).json({ message: err.message });
   }
 };
@@ -70,10 +65,9 @@ export const likePost = async (req, res) => {
       { likes: post.likes },
       { new: true }
     );
-    logger.info("Like/Dislike operation");
+
     res.status(200).json(updatedPost);
   } catch (err) {
-    logger.error(`Events Error: Post Like / Unlike Error of User`+e.message);
     res.status(404).json({ message: err.message });
   }
 };

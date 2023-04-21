@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     mode: "light",
-    user: "prafull", // inital null
+    user: null, // inital null
     token: null, 
+    friends: null,
     posts: [],
 };
 
@@ -30,8 +31,12 @@ export const authSlice = createSlice({
             }
         },
         setPosts: (state, action) => {
-            state.posts = action.payload.posts;
-        },
+            state.posts = action.payload.posts.slice(0)
+            .reverse()
+            .map((element) => {
+              return element;
+            });
+          },
         setPost: (state, action) => {
             const updatedPosts = state.posts.map((post) => {
                 if (post._id === action.payload.post._id) return action.payload.post; // if any new post is created than return it or return post

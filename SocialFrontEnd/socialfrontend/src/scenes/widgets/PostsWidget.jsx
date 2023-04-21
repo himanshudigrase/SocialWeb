@@ -26,7 +26,6 @@ const PostsWidget = ({ userId, isProfile = false }) => {
       }
     );
     const data = await response.json();
-    console.log('Data: '+data);
     dispatch(setPosts({ posts: data }));
   };
 
@@ -40,7 +39,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   return (
     <>
-      {posts.map(
+      {(posts && posts.length>0)&&posts.map(
         ({
           _id,
           userId,

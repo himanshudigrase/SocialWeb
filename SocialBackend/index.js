@@ -74,3 +74,5 @@ mongoose.connect(process.env.MONGO_URL,{
     // Post.insertMany(posts);
 
 }).catch((e)=>console.log(`${e}`));
+
+export default app;

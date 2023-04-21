@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import logger from "../logger.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -33,10 +32,8 @@ export const register = async (req, res) => {
       impressions: Math.floor(Math.random() * 10000),
     });
     const savedUser = await newUser.save();
-    logger.info("New User Registered");
     res.status(201).json(savedUser);
   } catch (err) {
-    logger.error("Events Error: Registering user Error");
     res.status(500).json({ error: err.message });
   }
 };
@@ -53,10 +50,8 @@ export const login = async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     delete user.password;
-    logger.info("Login Operation ");
     res.status(200).json({ token, user });
   } catch (err) {
-    logger.error("Events Error: Unauthenticated user");
     res.status(500).json({ error: err.message });
   }
 };
