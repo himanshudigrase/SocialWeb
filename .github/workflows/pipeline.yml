@@ -36,10 +36,14 @@ jobs:
           export TOKEN_KEY=$JWT_SECRET
           export PORT=$PORT
           
-  deploy:
+  publish:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    # Checkout the code from the GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       # Build a Docker image for the server application
       - name: Build Server Docker Image
         working-directory:
