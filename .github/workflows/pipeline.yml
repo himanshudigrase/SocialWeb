@@ -23,7 +23,7 @@ jobs:
 
       # Install dependencies and run tests for the client application
       - name: Install and Test Client
-        working-directory: ./SocialFrontend/socialfrontend
+        working-directory: ./SocialFrontEnd/socialfrontend
         run: |
           npm install
 
@@ -39,7 +39,7 @@ jobs:
 
       # Build a Docker image for the client application
       - name: Build Client Docker Image
-        working-directory: ./SocialFrontend/socialfrontend
+        working-directory: ./SocialFrontEnd/socialfrontend
         # Build image with tag rakeshpotnuru/productivity-app:client
         run: |
           docker build -t himanshudigrase/socialMedia:frontEnd-${{github.run_number}} .
