@@ -32,7 +32,7 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGODB_URI=$MONGODB_URL
+          export MONGO_URL=$MONGODB_URL
           export TOKEN_KEY=$JWT_SECRET
           export PORT=$PORT
           
