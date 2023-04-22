@@ -8,7 +8,7 @@ on:
 
 # Set environment variables
 env:
-  MONGODB_URL: ${{ secrets.MONGODB_URI }}
+  MONGODB_URL: ${{ secrets.MONGODB_URL }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
   PORT: 3001
 # This is the workflow that is being run.
