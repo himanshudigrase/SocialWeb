@@ -32,10 +32,9 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL=${{env.MONGO_URL}}
-          echo "The value of MONGO_URL is $MONGO_URL"
-          export JWT_SECRET=${{env.JWT_SECRET}}
-          export PORT=${{env.PORT}}
+          export MONGO_URL=${{secrets.MONGO_URL}}
+          export JWT_SECRET=${{secrets.JWT_SECRET}}
+          export PORT=3001
           
   publish:
     needs: build
