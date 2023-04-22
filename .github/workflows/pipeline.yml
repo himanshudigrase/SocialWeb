@@ -36,7 +36,7 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL=$MONGO_URL
+          export MONGO_URL= 'mongodb+srv://himanshudigrase:J097772H@socialmediacluster.1vyzwup.mongodb.net/?retryWrites=true&w=majority'
           echo "here is mongo url"
           echo MONGO_URL
           export JWT_SECRET=$JWT_SECRET
@@ -54,13 +54,13 @@ jobs:
       - name: Build Server Docker Image
         working-directory:
           ./SocialBackend
-          # Build image with tag rakeshpotnuru/productivity-app:server
+          
         run: |
           docker build -t hims0301/socialmedia:backend-${{github.run_number}} .
-      # Build a Docker image for the client application
+     
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
-        # Build image with tag rakeshpotnuru/productivity-app:client
+        
         run: |
           docker build -t hims0301/socialmedia:frontend-${{github.run_number}} .
 
