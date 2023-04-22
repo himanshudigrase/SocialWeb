@@ -33,6 +33,7 @@ jobs:
         run: |
           npm install
           export MONGO_URL=$MONGO_URL
+          echo "The value of MONGO_URL is $MONGO_URL"
           export JWT_SECRET=$JWT_SECRET
           export PORT=$PORT
           
