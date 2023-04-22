@@ -8,7 +8,7 @@ on:
 
 # Set environment variables
 env:
-  MONGODB_URL: ${{ secrets.MONGO_URL }}
+  MONGO_URL: ${{ secrets.MONGO_URL }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
   PORT: 3001
 # This is the workflow that is being run.
@@ -32,8 +32,8 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL=$MONGODB_URL
-          export TOKEN_KEY=$JWT_SECRET
+          export MONGO_URL=$MONGO_URL
+          export JWT_SECRET=$JWT_SECRET
           export PORT=$PORT
           
   publish:
