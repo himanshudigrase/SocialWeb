@@ -16,6 +16,10 @@ jobs:
   build:
     # This is telling GitHub to run the workflow on the latest version of Ubuntu.
     runs-on: ubuntu-latest
+    env:
+      MONGO_URL: ${{ secrets.MONGO_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      PORT: 3001
     steps:
       # Checkout the code from the GitHub repository
       - name: Checkout code
@@ -32,8 +36,8 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL=${{secrets.MONGO_URL}}
-          export JWT_SECRET=${{secrets.JWT_SECRET}}
+          export MONGO_URL=$MONGO_URL
+          export JWT_SECRET=$JWT_SECRET
           export PORT=3001
           
   publish:
