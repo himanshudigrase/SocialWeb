@@ -37,6 +37,8 @@ jobs:
         run: |
           npm install
           export MONGO_URL=$MONGO_URL
+          echo "here is mongo url"
+          echo $MONGO_URL
           export JWT_SECRET=$JWT_SECRET
           export PORT=3001
           
