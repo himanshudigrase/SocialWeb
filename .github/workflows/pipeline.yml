@@ -36,7 +36,7 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL= 'mongodb+srv://himanshudigrase:J097772H@socialmediacluster.1vyzwup.mongodb.net/?retryWrites=true&w=majority'
+          export MONGO_URL= mongodb+srv://himanshudigrase:J097772H@socialmediacluster.1vyzwup.mongodb.net/?retryWrites=true&w=majority
           echo "here is mongo url"
           echo MONGO_URL
           export JWT_SECRET=$JWT_SECRET
