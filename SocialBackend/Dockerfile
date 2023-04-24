@@ -5,7 +5,7 @@ RUN npm install -g nodemon
 WORKDIR /app
 ENV MONGO_URL $MONGO_URL
 COPY package.json .
-
+COPY .env /app/.env
 RUN npm install
 
 COPY . .
