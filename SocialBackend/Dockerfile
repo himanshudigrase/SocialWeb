@@ -3,7 +3,7 @@ FROM node:17-alpine
 RUN npm install -g nodemon
 
 WORKDIR /app
-
+ENV MONGO_URL $MONGO_URL
 COPY package.json .
 
 RUN npm install
