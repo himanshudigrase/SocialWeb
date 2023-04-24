@@ -36,8 +36,6 @@ jobs:
         working-directory: ./SocialBackend
         run: |
           npm install
-          export MONGO_URL= mongodb+srv://himanshudigrase:J097772H@socialmediacluster.1vyzwup.mongodb.net/?retryWrites=true&w=majority
-          echo "here is mongo url"
           echo MONGO_URL
           export JWT_SECRET=$JWT_SECRET
           export PORT=3001
@@ -56,7 +54,7 @@ jobs:
           ./SocialBackend
           
         run: |
-          docker build --network host -t hims0301/socialmedia:backend-${{github.run_number}} .
+          docker build --network host --build-arg MONGO_URL=$MONGO_URL -t hims0301/socialmedia:backend-${{github.run_number}} . 
      
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
