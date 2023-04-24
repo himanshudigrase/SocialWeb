@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json .
 
 # Layer 4: Installing the dependencies listed in the package.json file.
-RUN apk add --no-cache xdg-utils && \
+RUN apk add --no-cache xdg-utils curl && \
     npm install
 
 # Layer 5: Copying all the files from the root of the project to the `app` directory in the container.
@@ -20,4 +20,4 @@ EXPOSE 5173
 # Layer 7: Telling Docker to run the `npm start` command when the container is started.
 CMD ["npm", "run", "dev"]
 
-CMD ["o"]
+CMD ["sh", "-c", "curl http://localhost:5173/"]
