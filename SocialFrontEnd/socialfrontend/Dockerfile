@@ -20,4 +20,4 @@ EXPOSE 5173
 # Layer 7: Telling Docker to run the `npm start` command when the container is started.
 CMD ["npm", "run", "dev"]
 
-CMD ["sh", "-c", "curl http://localhost:5173/"]
+CMD ["o"]
