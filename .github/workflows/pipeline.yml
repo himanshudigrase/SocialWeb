@@ -56,13 +56,13 @@ jobs:
           ./SocialBackend
           
         run: |
-          docker build -t hims0301/socialmedia:backend-${{github.run_number}} .
+          docker build --network host -t hims0301/socialmedia:backend-${{github.run_number}} .
      
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
         
         run: |
-          docker build -t hims0301/socialmedia:frontend-${{github.run_number}} .
+          docker build --network host -t hims0301/socialmedia:frontend-${{github.run_number}} .
 
  
 
