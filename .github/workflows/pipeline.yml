@@ -61,6 +61,8 @@ jobs:
         
         run: |
           docker build --network host -t hims0301/socialmedia:frontend-${{github.run_number}} .
+      - name: Print MONGO_URL secret
+        run: echo ${{ secrets.MONGO_URL }}   
 
 
       # Login to Docker Hub using credentials from repository secrets
