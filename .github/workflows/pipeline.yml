@@ -54,13 +54,13 @@ jobs:
           ./SocialBackend
           
         run: |
-          docker build --net host --build-arg MONGO_URL=$MONGO_URL -t hims0301/socialmedia:backend-${{github.run_number}} . 
+          docker build --network host --build-arg MONGO_URL=$MONGO_URL -t hims0301/socialmedia:backend-${{github.run_number}} . 
      
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
         
         run: |
-          docker build --net host -t hims0301/socialmedia:frontend-${{github.run_number}} .
+          docker build --network host -t hims0301/socialmedia:frontend-${{github.run_number}} .
 
 
       # Login to Docker Hub using credentials from repository secrets
