@@ -11,8 +11,6 @@ services:
     networks:
       sociopedia:
         ipv4_address: 172.28.1.6
-    env_file:
-      - ./SocialBackend/.env
 
   sociopedia-backend:
     image: hims0301/socialmedia:backend-43
