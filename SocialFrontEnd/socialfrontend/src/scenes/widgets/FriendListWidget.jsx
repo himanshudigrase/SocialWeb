@@ -3,7 +3,7 @@ import WidgetWrapper from "../../components/WidgetWrapper";
 import Friend from "../../components/Friend";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "../../state";
+import { setFriends } from "../../state";
 
 const FriendListWidget = ({ userId }) => {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends.map((friend) => (
+        {(friends && friends.length>0)&&friends.map((friend) => (
           <Friend
             key={friend._id}
             friendId={friend._id}

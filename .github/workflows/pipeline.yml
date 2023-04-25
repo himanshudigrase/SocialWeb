@@ -1,0 +1,77 @@
+name: Build and Deploy
+
+# Run the workflow when code is pushed to the main branch
+on:
+  push:
+    branches:
+      - master
+
+# Set environment variables
+env:
+  MONGO_URL: ${{ secrets.MONGO_URL }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  PORT: 3001
+# This is the workflow that is being run.
+jobs:
+  build:
+    # This is telling GitHub to run the workflow on the latest version of Ubuntu.
+    runs-on: ubuntu-latest
+    env:
+      MONGO_URL: ${{ secrets.MONGO_URL }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      PORT: 3001
+    steps:
+      # Checkout the code from the GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install dependencies and run tests for the client application
+      - name: Install and Test Client
+        working-directory: ./SocialFrontEnd/socialfrontend
+        run: |
+          npm install
+
+      # Install dependencies, export environment variables to be used by application and run tests for the server application
+      - name: Install and Test Server
+        working-directory: ./SocialBackend
+        run: |
+          npm install
+          echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> .envv 
+          export JWT_SECRET=$JWT_SECRET
+          export PORT=3001
+          
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the code from the GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Build a Docker image for the server application
+      - name: Build Server Docker Image
+        working-directory:
+          ./SocialBackend
+          
+        run: |
+          docker build --network host --build-arg MONGO_URL=$MONGO_URL -t hims0301/socialmedia:backend-${{github.run_number}} . 
+     
+      - name: Build Client Docker Image
+        working-directory: ./SocialFrontEnd/socialfrontend
+        
+        run: |
+          docker build --network host -t hims0301/socialmedia:frontend-${{github.run_number}} .
+
+
+      # Login to Docker Hub using credentials from repository secrets
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Push the Docker images to Docker Hub
+      - name: Push Docker Images to Docker Hub
+        run: |
+          docker push hims0301/socialmedia:frontend-${{github.run_number}}
+          docker push hims0301/socialmedia:backend-${{github.run_number}}

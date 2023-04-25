@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Navbar from "../navbar";
 import FriendListWidget from "../widgets/FriendListWidget";
 import MyPostWidget from "../widgets/MyPostWidget";
-import PostWidget from "../widgets/PostWidget";
+import PostsWidget from "../widgets/PostsWidget";
 import UserWidget from "../widgets/UserWidget";
 
 const ProfilePage = () => {

@@ -47,8 +47,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 /*Auth code with middleware*/
-app.post('/auth/register',upload.single('/picture'),register);
-app.post('/posts', verifyToken,upload.single('/picture'),createPost);
+app.post('/auth/register',upload.single('picture'),register);
+app.post('/posts', verifyToken,upload.single('picture'),createPost);
 
 
 
@@ -61,13 +61,12 @@ app.use("/posts",postRoutes);
 
 /* MONGOOSE Setup*/
 const PORT = process.env.PORT || 6001;
-
-mongoose.connect(process.env.MONGO_URL,{
+mongoose.connect(process.env.PORT,{
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    
+    useUnifiedTopology: true,  
 })
 .then(()=>{
+     
     app.listen(PORT,()=>console.log(`Server Port: ${PORT}`));
 
     // Adding ONE TIME to avoid redundant data
@@ -75,3 +74,5 @@ mongoose.connect(process.env.MONGO_URL,{
     // Post.insertMany(posts);
 
 }).catch((e)=>console.log(`${e}`));
+
+export default app;
