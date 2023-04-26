@@ -10,6 +10,8 @@ RUN npm install
 
 COPY . .
 ENV MONGO_URL=$MONGO_URL
+ENV PORT=$PORT
+ENV JWT_SECRET=$JWT_SECRET
 EXPOSE 3001
 
 CMD ["nodemon", "index.js"]
