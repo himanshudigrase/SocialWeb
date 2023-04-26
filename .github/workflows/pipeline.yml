@@ -54,10 +54,10 @@ jobs:
           
         run: |
           docker build --network host \
---build-arg MONGO_URL=$MONGO_URL \
---build-arg PORT=$PORT \
---build-arg JWT_SECRET=$JWT_SECRET \
--t hims0301/socialmedia:backend-${{github.run_number}} .
+          --build-arg MONGO_URL=$MONGO_URL \
+          --build-arg PORT=$PORT \
+          --build-arg JWT_SECRET=$JWT_SECRET \
+          -t hims0301/socialmedia:backend-${{github.run_number}} .
      
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend
