@@ -35,8 +35,7 @@ jobs:
       - name: Install and Test Server
         working-directory: ./SocialBackend
         run: |
-          npm install
-          echo "MONGO_URL=${{ secrets.MONGO_URL }}" >> .envv 
+          npm install 
           export JWT_SECRET=$JWT_SECRET
           export PORT=3001
           
@@ -54,7 +53,11 @@ jobs:
           ./SocialBackend
           
         run: |
-          docker build --network host --build-arg MONGO_URL=$MONGO_URL -t hims0301/socialmedia:backend-${{github.run_number}} . 
+          docker build --network host \
+          --build-arg MONGO_URL=$MONGO_URL \
+          --build-arg PORT = $PORT \
+          --build-arg JWT_SECRET =$JWT_SECRET \
+          -t hims0301/socialmedia:backend-${{github.run_number}} . 
      
       - name: Build Client Docker Image
         working-directory: ./SocialFrontEnd/socialfrontend

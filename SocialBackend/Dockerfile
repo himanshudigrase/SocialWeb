@@ -1,5 +1,7 @@
 FROM node:17-alpine
 ARG MONGO_URL
+ARG PORT
+ARG JWT_SECRET
 RUN npm install -g nodemon
 
 WORKDIR /app
