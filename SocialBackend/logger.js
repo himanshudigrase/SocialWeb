@@ -1,5 +1,5 @@
 import { createLogger, transports, format } from "winston";
-
+import {ElasticsearchTransport} from 'winston-elasticsearch';
 const { combine, timestamp, label, printf,prettyPrint } = format;
 const CATEGORY = "winston custom format";
 
@@ -15,7 +15,7 @@ const logger = createLogger({
   format: combine(
     label({ label: CATEGORY }),
     timestamp({
-        format: "MMM-DD-YYYY HH:mm:ss",
+        format: "MMM DD YYYY HH:mm:ss",
       }),
       prettyPrint()
     ),
@@ -25,8 +25,14 @@ const logger = createLogger({
     new transports.File({
       filename: "./logs.log",
     }),
+    new ElasticsearchTransport({
+      level: 'info',
+      index: 'logs',
+      clientOpts:{
+        node: 'http://localhost:9200/',
+      }
+    })
   ],
-  //...
 });
 
 export default  logger;
