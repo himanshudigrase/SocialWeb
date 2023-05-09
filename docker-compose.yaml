@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   sociopedia-frontend:
-    image: hims0301/socialmedia:frontend:latest
+    image: hims0301/frontend:latest
     container_name: sociopedia-frontend
     # Keep stdin_open because we don't want this container to exit immediately which it
     # otherwise would have because there's no foreground processes
@@ -13,7 +13,7 @@ services:
        # ipv4_address: 172.28.1.6
 
   sociopedia-backend:
-    image: hims0301/socialmedia:backend:latest
+    image: hims0301/backend:latest
     container_name: sociopedia-backend
     ports:
       - "3001:3001"
