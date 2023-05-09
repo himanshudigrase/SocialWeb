@@ -1,55 +1,55 @@
 version: "3.9"
 services:
   sociopedia-frontend:
-    image: hims0301/socialmedia:frontend-43
+    image: hims0301/socialmedia:frontend:latest
     container_name: sociopedia-frontend
     # Keep stdin_open because we don't want this container to exit immediately which it
     # otherwise would have because there's no foreground processes
     stdin_open: true
     ports:
       - "3000:8889"
-    networks:
-      sociopedia:
-        ipv4_address: 172.28.1.6
+    network_mode: "host"
+      #sociopedia:
+       # ipv4_address: 172.28.1.6
 
   sociopedia-backend:
-    image: hims0301/socialmedia:backend-43
+    image: hims0301/socialmedia:backend:latest
     container_name: sociopedia-backend
     ports:
       - "3001:3001"
-    networks:
-      sociopedia:
-        ipv4_address: 172.28.1.7
+    network_mode: "host"
+      #sociopedia:
+      #  ipv4_address: 172.28.1.7
     # Using Docker volume for persisting logs
     # ./backend/logs refers to the path /home/backend/logs on the host machine
     # and we're linking it to logs folder on the container machine where Morgan logger logs its output
     #volumes:
     #  - ./backend/logs:/app/logs/
     volumes:
-      - /home/Downloads/logs:/usr/src/app/logs/
+      - ./Downloads/logs:/usr/src/app/logs/
 
 
   Elasticsearch:
     image: elasticsearch:7.16.2
     container_name: elasticsearch
     restart: always
-    volumes:
-    - elastic_data:/usr/share/elasticsearch/data/
+   # volumes:
+    #- elastic_data:/usr/share/elasticsearch/data/
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       discovery.type: single-node    
     ports:
     - '9200:9200'
     - '9300:9300'
-    networks:
-      - elk
+    network_mode: "host"
+     # - elk
 
   Logstash:
     image: logstash:7.16.2
     container_name: logstash
     restart: always
     volumes:
-    - ./logstash/:/logstash_dir
+    - ./Downloads/socialLogs/:/logstash_dir
     command: logstash -f /logstash_dir/logstash.conf 
     depends_on:
       - Elasticsearch
@@ -57,8 +57,8 @@ services:
     - '9600:9600'
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
-    networks:
-      - elk
+    network_mode: "host"
+      #- elk
 
   Kibana:
     image: kibana:7.16.2
@@ -70,8 +70,8 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200  
     depends_on:
       - Elasticsearch  
-    networks:
-      - elk
+    network_mode: "host"
+    #  - elk
 
 networks:
   sociopedia:
