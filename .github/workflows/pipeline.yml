@@ -81,13 +81,13 @@ jobs:
           docker push hims0301/frontend:latest
           docker push hims0301/backend:latest
       
-  deploy: 
-    needs: publish
-    runs-on: self-hosted
-    steps:   
-      - name: Deploy with Docker Compose
-        uses: docker/compose-action@v2
-        with:
-          compose-file: docker-compose.yaml
-          project-name: my_project
-          command: up -d
+  deploy:
+  needs: publish
+  runs-on: self-hosted
+  steps:
+    - name: Deploy with Docker Compose
+      uses: docker/compose@v1.28.5
+      with:
+        compose-file: docker-compose.yaml
+        project-name: my_project
+        command: up -d
