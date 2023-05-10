@@ -11,6 +11,7 @@ env:
   MONGO_URL: ${{ secrets.MONGO_URL }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
   PORT: 3001
+  PORTF: 8889
 # This is the workflow that is being run.
 jobs:
   build:
@@ -20,6 +21,7 @@ jobs:
       MONGO_URL: ${{ secrets.MONGO_URL }}
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       PORT: 3001
+      PORTF: 8889
     steps:
       # Checkout the code from the GitHub repository
       - name: Checkout code
@@ -64,7 +66,7 @@ jobs:
         
         run: |
           docker build --network host \
-          --build-arg PORT=8889 \
+          --build-arg PORT=$PORTF \
           -t hims0301/frontend:latest .
        
       # Login to Docker Hub using credentials from repository secrets

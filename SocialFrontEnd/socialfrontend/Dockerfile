@@ -14,7 +14,7 @@ RUN apk add --no-cache xdg-utils curl && \
 
 # Layer 5: Copying all the files from the root of the project to the `app` directory in the container.
 COPY . .
-ENV PORT=8889
+ENV PORT=$PORT
 # Layer 6: Telling Docker that the container will listen on port 5173.
 EXPOSE 8889
 
