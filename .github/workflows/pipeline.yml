@@ -85,9 +85,17 @@ jobs:
     needs: publish
     runs-on: self-hosted
     steps:
-      - name: Deploy with Docker Compose
-        uses: docker/compose@v1.28.5
-        with:
-          compose-file: docker-compose.yaml
-          project-name: my_project
-          command: up -d
+      # Checkout the code from the GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Install Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+
+      # Build and start the containers
+      - name: Build and start the containers
+        run: |
+          docker-compose -f docker-compose.yaml up -d
