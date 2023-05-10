@@ -16,6 +16,7 @@ services:
   sociopedia-backend:
     image: hims0301/backend:latest
     container_name: sociopedia-backend
+    stdin_open: true
     ports:
       - "3001:3001"
     networks:
