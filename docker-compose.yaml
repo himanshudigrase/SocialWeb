@@ -3,7 +3,7 @@ services:
   sociopedia-frontend:
     image: hims0301/frontend:latest
     container_name: sociopedia-frontend
-    # Keep stdin_open because we don't want this container to exit immediately which it
+    #  Keep stdin_open because we don't want this container to exit immediately which it
     # otherwise would have because there's no foreground processes
     stdin_open: true
     # ports:
