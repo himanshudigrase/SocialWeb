@@ -16,7 +16,7 @@ RUN apk add --no-cache xdg-utils curl && \
 COPY . .
 ENV PORT=$PORT
 # Layer 6: Telling Docker that the container will listen on port 5173.
-EXPOSE 8889
+EXPOSE 6002
 
 # Layer 7: Telling Docker to run the `npm start` command when the container is started.
 CMD ["npm", "run", "dev"]
