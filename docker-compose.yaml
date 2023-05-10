@@ -8,8 +8,8 @@ services:
     stdin_open: true
     # ports:
     #   - "6002:6002"
-    networks:
-      - sociopedia
+    network_mode: host
+     # - sociopedia
       #sociopedia:
        # ipv4_address: 172.28.1.6
 
