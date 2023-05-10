@@ -11,7 +11,7 @@ env:
   MONGO_URL: ${{ secrets.MONGO_URL }}
   JWT_SECRET: ${{ secrets.JWT_SECRET }}
   PORT: 3001
-  PORTF: 8889
+  PORTF: 6002
 # This is the workflow that is being run.
 jobs:
   build:
