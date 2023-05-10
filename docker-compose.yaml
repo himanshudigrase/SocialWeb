@@ -28,7 +28,7 @@ services:
     #volumes:
     #  - ./backend/logs:/app/logs/
     volumes:
-      - ./Downloads/socialLogs:/usr/src/app/logs/
+      - /home/himanshu/Downloads/socialLogs:/usr/src/app/logs/
 
 
   Elasticsearch:
