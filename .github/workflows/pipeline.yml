@@ -64,7 +64,7 @@ jobs:
         
         run: |
           docker build --network host \
-          --build-arg PORT=8889
+          --build-arg PORT=8889 \
           -t hims0301/frontend:latest .
        
       # Login to Docker Hub using credentials from repository secrets
