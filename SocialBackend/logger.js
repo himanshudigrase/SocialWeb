@@ -1,5 +1,8 @@
 import { createLogger, transports, format } from "winston";
 import {ElasticsearchTransport} from 'winston-elasticsearch';
+const LogstashTransport = require('winston-logstash-transport');
+
+
 const { combine, timestamp, label, printf,prettyPrint } = format;
 const CATEGORY = "winston custom format";
 
@@ -25,12 +28,9 @@ const logger = createLogger({
     new transports.File({
       filename: "./logs.log",
     }),
-    new ElasticsearchTransport({
-      level: 'info',
-      index: 'logs',
-      clientOpts:{
-        node: 'http://localhost:9200/',
-      }
+    new LogstashTransport({
+      host: 'logstash',
+      port: 9600,
     })
   ],
 });

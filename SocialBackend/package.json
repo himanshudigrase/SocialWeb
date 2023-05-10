@@ -15,7 +15,8 @@
     "multer-gridfs-storage": "^5.0.2",
     "nodemon": "^2.0.22",
     "winston": "^3.8.2",
-    "winston-elasticsearch": "^0.17.2"
+    "winston-elasticsearch": "^0.17.2",
+    "winston-logstash-transport": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
