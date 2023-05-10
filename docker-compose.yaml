@@ -80,4 +80,4 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 172.16.131.171/20
+      - subnet: 127.0.0.1/8
