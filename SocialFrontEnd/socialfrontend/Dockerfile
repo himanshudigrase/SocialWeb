@@ -1,6 +1,7 @@
 # Layer 1: Telling Docker to use the node:17-alpine image as the base image for the container.
 FROM node:17-alpine
 
+ARG PORT
 # Layer 2: Telling Docker to create a directory called `app` in the container and set it as the working directory.
 WORKDIR /app
 
@@ -13,7 +14,7 @@ RUN apk add --no-cache xdg-utils curl && \
 
 # Layer 5: Copying all the files from the root of the project to the `app` directory in the container.
 COPY . .
-
+ENV PORT=8889
 # Layer 6: Telling Docker that the container will listen on port 5173.
 EXPOSE 8889
 
