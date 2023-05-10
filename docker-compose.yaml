@@ -8,7 +8,8 @@ services:
     stdin_open: true
     ports:
       - "3000:8889"
-    network_mode: "host"
+    networks:
+      - elk
       #sociopedia:
        # ipv4_address: 172.28.1.6
 
@@ -17,7 +18,8 @@ services:
     container_name: sociopedia-backend
     ports:
       - "3001:3001"
-    network_mode: "host"
+    networks:
+      - elk
       #sociopedia:
       #  ipv4_address: 172.28.1.7
     # Using Docker volume for persisting logs
@@ -39,10 +41,10 @@ services:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       discovery.type: single-node    
     ports:
-    - '9200:9200'
-    - '9300:9300'
-    network_mode: "host"
-     # - elk
+      - '9200:9200'
+      - '9300:9300'
+    networks: 
+     - elk
 
   Logstash:
     image: logstash:7.16.2
@@ -54,11 +56,11 @@ services:
     depends_on:
       - Elasticsearch
     ports:
-    - '9600:9600'
+      - '9600:9600'
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
-    network_mode: "host"
-      #- elk
+    networks:
+      - elk
 
   Kibana:
     image: kibana:7.16.2
@@ -70,12 +72,17 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200  
     depends_on:
       - Elasticsearch  
-    network_mode: "host"
-    #  - elk
+    networks: 
+      - elk
+
 
 networks:
-  sociopedia:
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.28.1.0/24
+  elk:
+    driver: host
+
+# networks:
+#   sociopedia:
+#     ipam:
+#       driver: default
+#       config:
+#       - subnet: 172.28.1.0/24
