@@ -31,7 +31,15 @@ const logger = createLogger({
     new LogstashTransport({
       host: 'logstash',
       port: 9600,
-    })
+    }),
+    new ElasticsearchTransport({
+      level: 'info',
+      index: 'logs',
+      clientOpts: {
+        node: 'http://localhost:9200/',
+        
+      },
+    }),
   ],
 });
 
