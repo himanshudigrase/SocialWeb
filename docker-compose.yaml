@@ -81,3 +81,6 @@ networks:
       driver: default
       config:
       - subnet: 127.0.0.1/8
+volumes:
+  elastic_data:
+    driver: local      
