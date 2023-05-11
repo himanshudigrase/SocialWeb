@@ -14,7 +14,7 @@ const CATEGORY = "winston custom format";
 
 
 const logger = createLogger({
-  level: "debug",
+  level: "info",
   format: combine(
     label({ label: CATEGORY }),
     timestamp({
