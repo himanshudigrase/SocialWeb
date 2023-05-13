@@ -1,16 +1,21 @@
-import request from 'supertest';
-import app from '../app';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../index.js';
+
+const expect = chai.expect;
+chai.use(chaiHttp);
+
 
 describe('User API', () => {
   let token;
 
-  beforeAll(async () => {
+  before(async () => {
     // Login to get a JWT token for protected routes
-    const response = await request(app)
+    const response = await chai.request(app)
       .post('/api/auth/login')
       .send({
-        email: 'user@example.com',
-        password: 'password123',
+        email: 'kate@gmail.com',
+        password: 'kate',
       });
 
     token = response.body.token;
@@ -29,13 +34,13 @@ describe('User API', () => {
         occupation: 'Software Engineer',
       };
 
-      const response = await request(app)
+      const response = await chai.request(app)
         .post('/api/users')
-        .send(newUser)
-        .set('Authorization', `Bearer ${token}`);
+        .set('Authorization', `Bearer ${token}`)
+        .send(newUser);
 
-      expect(response.status).toBe(201);
-      expect(response.body).toMatchObject(newUser);
+      expect(response.status).to.equal(201);
+      expect(response.body).to.deep.include(newUser);
     });
 
     it('returns an error if required fields are missing', async () => {
@@ -44,13 +49,13 @@ describe('User API', () => {
         password: 'password123',
       };
 
-      const response = await request(app)
+      const response = await chai.request(app)
         .post('/api/users')
-        .send(newUser)
-        .set('Authorization', `Bearer ${token}`);
+        .set('Authorization', `Bearer ${token}`)
+        .send(newUser);
 
-      expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty('error');
+      expect(response.status).to.equal(400);
+      expect(response.body).to.have.property('error');
     });
   });
 
@@ -61,11 +66,11 @@ describe('User API', () => {
         password: 'password123',
       };
 
-      const response = await request(app).post('/api/auth/login').send(credentials);
+      const response = await chai.request(app).post('/api/auth/login').send(credentials);
 
-      expect(response.status).toBe(200);
-      expect(response.body).toHaveProperty('token');
-      expect(response.body).toHaveProperty('user');
+      expect(response.status).to.equal(200);
+      expect(response.body).to.have.property('token');
+      expect(response.body).to.have.property('user');
     });
 
     it('returns an error for invalid credentials', async () => {
@@ -74,10 +79,10 @@ describe('User API', () => {
         password: 'invalidpassword',
       };
 
-      const response = await request(app).post('/api/auth/login').send(credentials);
+      const response = await chai.request(app).post('/api/auth/login').send(credentials);
 
-      expect(response.status).toBe(400);
-      expect(response.body).toHaveProperty('error');
+      expect(response.status).to.equal(400);
+      expect(response.body).to.have.property('error');
     });
   });
 });
