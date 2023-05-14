@@ -29,10 +29,11 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       discovery.type: single-node    
-    # ports:
-    # - '9200:9200'
-    # - '9300:9300'
-    network_mode: host
+    ports:
+    - '9200:9200'
+    - '9300:9300'
+    networks:
+      - sociopedia
 
   Logstash:
     image: logstash:7.16.2
@@ -43,30 +44,32 @@ services:
     command: logstash -f /logstash_dir/logstash.conf 
     depends_on:
       - Elasticsearch
-    # ports:
-    # - '9600:9600'
+    ports:
+    - '9600:9600'
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
-    network_mode: host
+    networks:
+      - sociopedia
 
   Kibana:
     image: kibana:7.16.2
     container_name: kibana
     restart: always       
-    # ports:
-    # - '5601:5601'
+    ports:
+    - '5601:5601'
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200  
     depends_on:
       - Elasticsearch  
-    network_mode: host
+    networks:
+      - sociopedia
 
 networks:
   sociopedia:
     ipam:
       driver: default
       config:
-      - subnet: 127.0.0.5/8
+      - subnet: 127.0.0.1/8
 volumes:
   elastic_data:
     driver: local      
