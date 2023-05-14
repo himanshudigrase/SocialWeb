@@ -11,6 +11,7 @@ services:
       - sociopedia
     volumes:
       - /home/himanshu/Downloads/socialLogs/logs.log:/app/logs.log
+  
   sociopedia-frontend:
     image: hims0301/frontend:latest
     container_name: sociopedia-frontend
@@ -69,7 +70,7 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 127.0.0.1/8
+      - subnet: 127.0.0.5/8
 volumes:
   elastic_data:
     driver: local      
