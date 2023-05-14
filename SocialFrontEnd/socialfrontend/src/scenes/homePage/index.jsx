@@ -7,8 +7,8 @@ import PostWidget from "../widgets/PostWidget";
 import AdvertWidget from "../widgets/AdvertWidget";
 import FriendListWidget from "../widgets/FriendListWidget";
 import PostsWidget from "../widgets/PostsWidget";
-import storage from 'redux-persist/lib/storage';
-import { Provider } from 'react-redux';
+// import storage from 'redux-persist/lib/storage';
+// import { Provider } from 'react-redux';
 
 
 const HomePage = () => {
@@ -16,7 +16,7 @@ const HomePage = () => {
   const { _id, picturePath } = useSelector((state) => state.user);
 
   return (
-    <Provider store={Storage}>
+    // <Provider store={Storage}>
          <Box>
       <Navbar />
       <Box
@@ -45,7 +45,7 @@ const HomePage = () => {
         )}
       </Box>
     </Box>
-    </Provider>
+    // </Provider>
    
   );
 };
