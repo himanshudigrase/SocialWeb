@@ -1,6 +1,7 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
 import logger from "../logger.js";
+
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
@@ -24,7 +25,7 @@ export const createPost = async (req, res) => {
     res.status(201).json(post);
   } catch (err) {
     logger.error("Events Error: Post Creation Error");
-    res.status(409).json({ message: err.message });
+    res.status(409).json({ err});
   }
 };
 
@@ -35,7 +36,7 @@ export const getFeedPosts = async (req, res) => {
     res.status(200).json(post);
   } catch (err) {
     logger.error("Events Error: Post Fetch Error");
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ message:"Invalid" });
   }
 };
 
@@ -47,7 +48,7 @@ export const getUserPosts = async (req, res) => {
     res.status(200).json(post);
   } catch (err) {
     logger.error(`Events Error: Post Fetch Error of User ${req.params}`);
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ msg: "Invalid" });
   }
 };
 
@@ -74,6 +75,6 @@ export const likePost = async (req, res) => {
     res.status(200).json(updatedPost);
   } catch (err) {
     logger.error(`Events Error: Post Like / Unlike Error of User`+e.message);
-    res.status(404).json({ message: err.message });
+    res.status(404).json({ msg: "User not found" });
   }
 };
