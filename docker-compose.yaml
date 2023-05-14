@@ -8,9 +8,9 @@ services:
     # ports:
     #   - "3001:3001"
     network_mode: host
+    #  - sociopedia
     volumes:
       - /home/himanshu/Downloads/socialLogs/logs.log:/app/logs.log
-  
   sociopedia-frontend:
     image: hims0301/frontend:latest
     container_name: sociopedia-frontend
@@ -29,11 +29,11 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
       discovery.type: single-node    
-    ports:
-    - '9200:9200'
-    - '9300:9300'
-    networks:
-      - sociopedia
+    # ports:
+    # - '9200:9200'
+    # - '9300:9300'
+    network_mode: host
+   #   - sociopedia
 
   Logstash:
     image: logstash:7.16.2
@@ -44,12 +44,12 @@ services:
     command: logstash -f /logstash_dir/logstash.conf 
     depends_on:
       - Elasticsearch
-    ports:
-    - '9600:9600'
+    # ports:
+    # - '9600:9600'
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"    
-    networks:
-      - sociopedia
+    networks_mode: host
+     # - sociopedia
 
   Kibana:
     image: kibana:7.16.2
@@ -58,11 +58,11 @@ services:
     ports:
     - '5601:5601'
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200  
+      - ELASTICSEARCH_URL=http://localhost:9200  
     depends_on:
       - Elasticsearch  
-    networks:
-      - sociopedia
+    network_mode: host
+     # - sociopedia
 
 networks:
   sociopedia:
