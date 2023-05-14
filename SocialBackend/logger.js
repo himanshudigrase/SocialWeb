@@ -20,17 +20,17 @@ const logger = createLogger({
     new transports.File({
       filename: "./logs.log",
     }),
-    // new LogstashTransport({
-    //   host: 'logstash',
-    //   port: 9600,
-    // }),
-    // new ElasticsearchTransport({
-    //   level: 'info',
-    //   index: 'logs',
-    //   clientOpts: {
-    //     node: 'http://localhost:9200/',       
-    //   },
-    // }),
+    new LogstashTransport({
+      host: 'logstash',
+      port: 9600,
+    }),
+    new ElasticsearchTransport({
+      level: 'info',
+      index: 'logs',
+      clientOpts: {
+        node: 'http://localhost:9200/',       
+      },
+    }),
   ],
 });
 

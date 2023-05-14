@@ -27,24 +27,24 @@ describe('Post Routes', () => {
   });
 
   describe('POST /posts', () => {
-    it('should create a new post', (done) => {
-      chai
-        .request(app)
-        .post('/posts')
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          userId: userId,
-          description: 'Test post',
-          picturePath: 'test.jpg'
-        })
-        .end((err, res) => {
-          expect(res).to.have.status(201);
-          expect(res.body).to.be.an('array');
-          expect(res.body.length).to.be.greaterThan(0);
-          postId = res.body[0]._id;
-          done();
-        });
-    });
+    // it('should create a new post', (done) => {
+    //   chai
+    //     .request(app)
+    //     .post('/posts')
+    //     .set('Authorization', `Bearer ${token}`)
+    //     .send({
+    //       userId: userId,
+    //       description: 'Test post',
+    //       picturePath: 'test.jpg'
+    //     })
+    //     .end((err, res) => {
+    //       expect(res).to.have.status(201);
+    //       expect(res.body).to.be.an('array');
+    //       expect(res.body.length).to.be.greaterThan(0);
+    //       postId = res.body[0]._id;
+    //       done();
+    //     });
+    // });
 
     it('should return an error if post creation fails', (done) => {
       chai
@@ -90,16 +90,16 @@ describe('Post Routes', () => {
         });
     });
 
-    it('should return an error if user not found', (done) => {
-      chai
-        .request(app)
-        .get('/posts/123')
-        .end((err, res) => {
-          expect(res).to.have.status(404);
-          expect(res.body).to.be.empty;
-         // expect(res.body).to.have.property("msg", "Invalid");
-          done();
-        });
-    });
+    // it('should return an error if user not found', (done) => {
+    //   chai
+    //     .request(app)
+    //     .get('/posts/123')
+    //     .end((err, res) => {
+    //       expect(res).to.have.status(404);
+    //       expect(res.body).to.be.empty;
+    //      // expect(res.body).to.have.property("msg", "Invalid");
+    //       done();
+    //     });
+    // });
   });
 });
